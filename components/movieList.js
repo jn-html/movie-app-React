@@ -27,7 +27,7 @@ class MovieList extends React.Component {
 		})
 	}
 
-	decrement = () => {
+	decrement () {
 		// alert('Decrementing Number')
 		const {count} = this.state
 		this.setState({	count: count -1 })
