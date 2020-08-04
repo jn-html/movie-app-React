@@ -1,40 +1,22 @@
 import { useState } from 'react';
 
 
-const SideMenu = () => {
-	const [ count, setCount ] = useState(0)
-	// OR
-	// const stateArray = useState(0)
-	// const count = stateArray[0]
-	// const setCount = stateArray[1]
+const SideMenu = (props) => {
 
-	const increment = () => {
-		const newCount = count + 1
-		setCount(newCount)
-		// setCount(count + 1)
-	}
-
-	const decrement = () => {
-		// alert('Decrementing Number')
-		const newCount = count - 1
-		setCount(newCount)
-	}
-
-	
   return (
 		<div>
-				<h1 className="my-4">Shop Name</h1>
-				<div className="list-group">
-					<a href="#" className="list-group-item">Category 1</a>
-					<a href="#" className="list-group-item">Category 2</a>
-					<a href="#" className="list-group-item">Category 3</a>
-				</div>
-				<div>
-					<button onClick={increment} className="btn btn-primary">Increment Number</button>
-					<button onClick={decrement} className="btn btn-primary">Decrement Number</button>
+			<button onClick={props.clickHandler}>Click Me !</button>
+			<h1 className="my-4">{props.appName}</h1>
+			<div className="list-group">
+				<a href="#" className="list-group-item">Category 1</a>
+				<a href="#" className="list-group-item">Category 2</a>
+				<a href="#" className="list-group-item">Category 3</a>
+			</div>
+			<div>
+				
 
-					<h1>{count}</h1>
-				</div>
+				<h1>{props.count}</h1>
+			</div>
 		</div>
 	);
 }
