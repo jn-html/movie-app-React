@@ -28,6 +28,8 @@ import { getMovies } from '../actions';
 
   const Home = (props) => {
 
+    
+
   return (
     <div>
       <Head>

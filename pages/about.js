@@ -22,15 +22,16 @@ import React from 'react';
 // }
 
 
-class About extends React.Component {
+// class About extends React.Component {
    
-   render() {
-      return (
-         <h1>Hello i'm class a component</h1>
-      );
-   }
-}
+//    render() {
+//       return (
+//          <h1>Hello i'm class a component</h1>
+//       );
+//    }
+// }
 
+const About = () => <div>About page</div>
 
 export default About;
  
