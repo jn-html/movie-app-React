@@ -11,9 +11,12 @@ import { getMovies } from '../actions';
 
 
 const Home = () => {
+  const [movies, setMovies] = useState([])
 
   // Improve this because now it's called everytime!
-  const movies = getMovies()
+  getMovies().then((movies)=> {
+    setMovies(movies)
+  })
   
   return (
     <div>
