@@ -26,7 +26,9 @@ import { getMovies } from '../actions';
 
   const Home = (props) => {
 
-    
+    const { images } = props
+    // Same as 
+    // const images = props.images
 
   return (
     <div>
@@ -40,7 +42,7 @@ import { getMovies } from '../actions';
               />
             </div>
             <div className="col-lg-9">
-              <Carousel />
+              <Carousel images={images}/>
               <div className="row">
                 <MovieList movies={props.movies || []} />
               </div>
@@ -54,10 +56,23 @@ import { getMovies } from '../actions';
   )
 };
 
+
 Home.getInitialProps = async () => {
   const movies = await getMovies()
+  const image = movies.map((movie) => {
+    return {
+      id: `image-${movie.id}`,
+      image: movie.image
+    }
+  })
+  // can be done like this
+  // const image = movies.map(movie => ({
+  //     id: `image-${movie.id}`,
+  //     image: movie.image}))
+
   return {
-    movies: movies
+    movies: movies,
+    images
   }
 }
 
