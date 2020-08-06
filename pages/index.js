@@ -4,7 +4,7 @@ import SideMenu from '../components/sideMenu';
 import Carousel from '../components/carousel';
 import MovieList from '../components/movieList';
 
-import { getMovies } from '../actions';
+import { getMovies, getCategories } from '../actions';
 
 
 
@@ -26,7 +26,7 @@ import { getMovies } from '../actions';
 
   const Home = (props) => {
 
-    const { images } = props
+    const { images, categories, movies} = props
     // Same as 
     // const images = props.images
 
@@ -38,13 +38,14 @@ import { getMovies } from '../actions';
           <div className="row">
             <div className="col-lg-3">
               <SideMenu 
+                categories={categories}
                 appName={"Movie DB"}
               />
             </div>
             <div className="col-lg-9">
               <Carousel images={images}/>
               <div className="row">
-                <MovieList movies={props.movies || []} />
+                <MovieList movies={movies || []} />
               </div>
             </div>
           </div>
@@ -56,26 +57,35 @@ import { getMovies } from '../actions';
   )
 };
 
-
-Home.getInitialProps = async () => {
-  const movies = await getMovies()
-  const images = movies.map((movie) => {
-    return {
-      id: `image-${movie.id}`,
-      url: movie.cover,
-      name: movie.name
-    }
-  })
-  // can be done like this
+// can be done like this
+  // Home.getInitialProps = async () => {
   // const image = movies.map(movie => ({
   //     id: `image-${movie.id}`,
   //     image: movie.image}))
 
+
+Home.getInitialProps = async () => {
+  const movies = await getMovies()
+  const categories = await getCategories()
+  const images = movies.map((movie) => {
+    return {
+      id: `image-${movie.id}`,
+      url: movie.cover,
+      name: movie.name,
+
+    }
+  })
+  
+
   return {
     movies: movies,
-    images
+    images,
+    categories
   }
 }
+
+export default Home;
+
 
 // class Home extends React.Component {
 
@@ -160,4 +170,3 @@ Home.getInitialProps = async () => {
 //   }  
 // };
 
-export default Home;
