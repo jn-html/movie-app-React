@@ -59,10 +59,11 @@ import { getMovies } from '../actions';
 
 Home.getInitialProps = async () => {
   const movies = await getMovies()
-  const image = movies.map((movie) => {
+  const images = movies.map((movie) => {
     return {
       id: `image-${movie.id}`,
-      image: movie.image
+      url: movie.cover,
+      name: movie.name
     }
   })
   // can be done like this
