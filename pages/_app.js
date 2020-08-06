@@ -5,12 +5,22 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 
 
-// ToDO: Execute here getInitialProps and pass this data to your page
+
+
+
 class MovieApp extends App {
+  
+  // ToDO: Execute here getInitialProps and pass this data to your page
+  static async getInitialProps(appContext) {
+    // Executing getInitialProps of page you are navigating to
+    const appProps = await App.getInitialProps(appContext)
+    return { ...appProps }
+  }
+
   render() {
 
     // Component holds page you are navigating to
-    const { Component } = this.props
+    const { Component, pageProps } = this.props
 
     return (
       <div>
@@ -23,7 +33,7 @@ class MovieApp extends App {
         </Head>
         <Navbar />
         <div className="base-page">
-          <Component />
+          <Component {...pageProps} />
         </div>
         <Footer />
         <style jsx>{`
