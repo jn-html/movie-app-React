@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Modal from './modal'
+import Modal from './modal';
+import MovieCreateForm from './movieCreateForm';
 
 
 const SideMenu = (props) => {
@@ -7,7 +8,10 @@ const SideMenu = (props) => {
 
   return (
 		<div>
-		<Modal />
+			{/* Containment */}
+			<Modal>
+				<MovieCreateForm />
+			</Modal>
 			<h1 className="my-4">{props.appName}</h1>
 			<div className="list-group">
 				{ categories.map(c => <a key={c.id}	href="#" className="list-group-item">{c.name}</a>)}
