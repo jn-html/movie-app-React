@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-const MovieCreateForm = () => {
+const MovieCreateForm = (props) => {
+
+
+  // fix uncontrolled data!
   const [form, setForm] = useState({
     name:'Some Movie',
     description: 'Some Description'
@@ -28,15 +31,20 @@ const MovieCreateForm = () => {
     }
     setForm ({
       ...form,
-      // to get the return of the array in string puts ","
+      // to get the return of the array in string, puts ","
       genre: value.toString()
     })
+  }
+
+  const submitForm = () => {
+    // call here function to create movie from props
+    props.handleFormSubmit({...form})
   }
 
 
   return (
     <form>
-      { JSON.stringify(form)}
+      {/* { JSON.stringify(form)} */}
       <div className="form-group">
         <label for="name">Name</label>
         <input
@@ -127,6 +135,7 @@ const MovieCreateForm = () => {
           <option>action</option>
         </select>
       </div>
+      <button onClick={submitForm} type="button" className="btn btn-primary">Save Movie</button>
     </form>
   );
 };
