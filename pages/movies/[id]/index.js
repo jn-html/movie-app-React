@@ -1,6 +1,6 @@
 // Next offer bracket so id is dynamique (Detail page)
 import { useRouter } from 'next/router';
-import { getMoviesById, deleteMovie } from '../../actions';
+import { getMoviesById, deleteMovie } from '../../../actions';
 
 const Movie = (props) => {
   const router = useRouter()
