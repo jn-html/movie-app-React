@@ -41,7 +41,7 @@ const MovieCreateForm = (props) => {
 
   const submitForm = () => {
     // call here function to create movie from props
-    // destructure to prevent error on change
+    // destructure to prevent error on changed value
     props.handleFormSubmit({...form})
   }
 
