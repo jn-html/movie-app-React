@@ -3,10 +3,13 @@ import { useState } from "react";
 const MovieCreateForm = (props) => {
 
 
-  // fix uncontrolled data!
   const [form, setForm] = useState({
-    name:'Some Movie',
-    description: 'Some Description'
+    name:'',
+    description: '',
+    rating: '',
+    image: '',
+    cover: '',
+    longdesc: ''
   });
 
   const handleChange = (event) => {
@@ -38,6 +41,7 @@ const MovieCreateForm = (props) => {
 
   const submitForm = () => {
     // call here function to create movie from props
+    // destructure to prevent error on change
     props.handleFormSubmit({...form})
   }
 
