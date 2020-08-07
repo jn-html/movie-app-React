@@ -20,6 +20,16 @@ app.prepare().then(() => {
     return res.json(moviesData)
   })
 
+  server.get('/api/v1/movies/:id', (req, res) => {
+    const { id } = req.params
+
+    // const movieIndex = moviesData.find(movie => movie.id === id)
+    // const movie = moviesData[movieIndex]
+    const movie = moviesData.find(movie => movie.id === id)
+
+    return res.json(movie)
+  })
+
   server.post('/api/v1/movies', (req, res) => {
     const movie = req.body
     return res.json({...movie, createdTime: 'today', author: 'JN'})
