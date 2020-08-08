@@ -28,10 +28,20 @@ import { getMovies, getCategories } from '../actions';
     // Same as 
     // const images = props.images
     const { images, categories, movies} = props
-    const [ filter, setFilter] = useState('')
+    const [ filter, setFilter] = useState('all')
 
     const changeCategory = (category) => {
       setFilter(category)
+    }
+
+    const filterMovies = () => {
+      if (filter === 'all') {
+        return movies
+      }
+
+      return movies.filter((movie)=> {
+        return movie.genre && movie.genre.includes(filter)
+      })
     }
   
 
@@ -51,9 +61,9 @@ import { getMovies, getCategories } from '../actions';
             </div>
             <div className="col-lg-9">
               <Carousel images={images}/>
-              <h1>Displaying all {filter} movies</h1>
+              <h1>Displaying {filter} movies</h1>
               <div className="row">
-                <MovieList movies={movies || []} />
+                <MovieList movies={filterMovies(movies) || []} />
               </div>
             </div>
           </div>
