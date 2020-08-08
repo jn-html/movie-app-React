@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MovieCreateForm = (props) => {
 
+  const [ isInitialDataLoaded, setIsInitialDataLoaded] = useState(false)
 
-  const [form, setForm] = useState({
+  const defaultData = {
     name:'',
     description: '',
     rating: '',
     image: '',
     cover: '',
     longdesc: ''
-  });
+  }
+
+  const formData = props.initialData ? {...props.initialData} : defaultData
+
+  const [form, setForm] = useState(formData);
+
+  // useEffect(()=> {
+  //   if (props.initialData) {
+  //     setForm(props.initialData)
+  //     setIsInitialDataLoaded(true)
+  //   }
+  //   // write this to stop from using effect everytime component re-render
+  // }, [isInitialDataLoaded])
 
   const handleChange = (event) => {
     const target = event.target
