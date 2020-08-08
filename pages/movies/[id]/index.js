@@ -1,6 +1,7 @@
 // Next offer bracket so id is dynamique (Detail page)
 import { useRouter } from 'next/router';
 import { getMovieById, deleteMovie } from '../../../actions';
+import Link from 'next/link';
 
 const Movie = (props) => {
   const router = useRouter()
@@ -24,8 +25,10 @@ const Movie = (props) => {
 					<p className="lead"></p>
     			<button className="btn btn-primary btn-lg mr-2" href="#" role="button">Learn more</button>
 					<button onClick={() => handleDeleteMovie(id)} className="btn btn-danger btn-lg mr-2" href="#" role="button">Delete</button>
-					<button onClick={() => router.push(`/movies/${id}/edit`)} className="btn btn-warning btn-lg" href="#" role="button">Edit</button>
-
+					<Link href='/movies/[id]/edit' as={`/movies/${id}/edit`}>
+						<button  className="btn btn-warning btn-lg" href="#" role="button">Edit</button>
+						{/* onClick={() => router.push(`/movies/${id}/edit`)} */}
+					</Link>
       	</div>
 				<p className="desc-text">
 					{ movie.longDesc }
