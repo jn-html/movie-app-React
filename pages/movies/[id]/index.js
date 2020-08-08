@@ -1,6 +1,6 @@
 // Next offer bracket so id is dynamique (Detail page)
 import { useRouter } from 'next/router';
-import { getMoviesById, deleteMovie } from '../../../actions';
+import { getMovieById, deleteMovie } from '../../../actions';
 
 const Movie = (props) => {
   const router = useRouter()
@@ -43,7 +43,7 @@ const Movie = (props) => {
 // Call getMovieById ("2")
 Movie.getInitialProps = async ({ query }) => {
 	// const {id} = context.query
-	const movie = await getMoviesById(query.id)
+	const movie = await getMovieById(query.id)
 	
 	return { movie }
 }

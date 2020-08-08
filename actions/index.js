@@ -35,9 +35,9 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://localhost:3001'
 
-const MOVIE_DATA = []
+const MOVIE_DATA = [];
 
 const CATEGORY_DATA = [
 	{d: 'c-1', name: 'drama'},
@@ -68,8 +68,8 @@ export const getMovies = () => {
 	// 	}, 50)
 	// })
 
-	return axios.get(`${BASE_URL}/api/v1/movies`).then((res) => {return res.data})
-	// return axios.get(`${BASE_URL}/api/v1/movies`).then(res => return res.data)
+	// return axios.get(`${BASE_URL}/api/v1/movies`).then((res) => {return res.data})
+	return axios.get(`${BASE_URL}/api/v1/movies`).then(res => res.data)
 }
 
 export const createMovie = (movie) => {
@@ -77,16 +77,26 @@ export const createMovie = (movie) => {
 	return axios.post(`${BASE_URL}/api/v1/movies`, movie).then(res => res.data)
 }
 
-export const getMoviesById = (id) => {
+export const getMovieById = (id) => {
 	return axios.get(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data)		
+}
+
+export const updateMovie = (movie) => {
+	return axios.patch(`${BASE_URL}/api/v1/movies/${movie.id}`, movie).then(res => res.data)		
 }
 
 export const deleteMovie = (id) => {
 	return axios.delete(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data)		
 }
 
+export const getPosts = () => {
+  return axios.get(`${BASE_URL}/api/v1/posts`).then(res => res.data)
+}
+
+
+
 // Another way to do the same as above
-// export const getMoviesById = (id) => {
+// export const getMovieById = (id) => {
 // 	return new Promise((resolve, reject) => {
 // 		const movieIndex = MOVIE_DATA.findIndex(m => m.id === id)
 // 		const movie = MOVIE_DATA[movieIndex]

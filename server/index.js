@@ -48,10 +48,10 @@ app.prepare().then(() => {
     })
   })
 
-  server.patch('/api/v1/movies/:id', (req, res) => {
-    const { id } = req.params
-    return res.json({message:`Updating post of id: ${id}`})
-  })
+  // server.patch('/api/v1/movies/:id', (req, res) => {
+  //   const { id } = req.params
+  //   return res.json({message:`Updating post of id: ${id}`})
+  // })
 
   // server.patch('/api/v1/movies/:slug', (req, res) => {
   //   return res.json({message:'HEllo there'})
@@ -61,7 +61,6 @@ app.prepare().then(() => {
     const { id } = req.params
     // find movie in array
     const movieIndex = moviesData.findIndex(movie => movie.id === id)
-
     moviesData.splice(movieIndex, 1)
 
     const pathToFile = path.join(__dirname, filePath)
@@ -71,11 +70,51 @@ app.prepare().then(() => {
       if (err) {
         return res.status(422), send(err)
       }
-      return res.json('Movie has been succesfuly added!')
+      return res.json('Movie has been succesfuly deleted!')
     })
   })
 
-  // server.get('/faq', (req, res) => {
+  server.patch('/api/v1/movies/:id', (req, res) => {
+    const { id } = req.params
+    const movie = req.body
+    const movieIndex = moviesData.findIndex(movie => movie.id === id)
+    
+    moviesData[movieIndex] = movie
+
+    const pathToFile = path.join(__dirname, filePath)
+    const stringifiedData = JSON.stringify(moviesData, null, 2)
+
+    fs.writeFile(pathToFile, stringifiedData, (err) => {
+      if (err) {
+        return res.status(422), send(err)
+      }
+      // return res.json('Movie has been succesfuly update!')
+      return res.json(movie)
+    })
+  })
+
+  
+
+  // We are handling all requests comming to our server
+  server.get('*', (req, res) => {
+    // next.js is handling requests and providing pages we are navigating to
+    return handle(req, res)
+  })
+
+  const PORT = process.env.PORT || 3001;
+
+  server.use(handle).listen(PORT, (err) => {
+    if (err) throw err
+    console.log('> Ready on port ' + PORT)
+  })
+})
+
+
+
+
+
+
+// server.get('/faq', (req, res) => {
   //   res.send(`
   //     <html>
   //       <head></head>
@@ -85,17 +124,3 @@ app.prepare().then(() => {
   //     </html>
   //   `)
   // })
-
-  // We are handling all requests comming to our server
-  server.get('*', (req, res) => {
-    // next.js is handling requests and providing pages we are navigating to
-    return handle(req, res)
-  })
-
-  const PORT = process.env.PORT || 3000;
-
-  server.use(handle).listen(PORT, (err) => {
-    if (err) throw err
-    console.log('> Ready on port ' + PORT)
-  })
-})
