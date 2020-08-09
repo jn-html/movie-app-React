@@ -95,14 +95,21 @@ app.prepare().then(() => {
 
   
 
-  // We are handling all requests comming to our server
-  server.get('*', (req, res) => {
-    // next.js is handling requests and providing pages we are navigating to
-    return handle(req, res)
-  })
+  // // We are handling all requests comming to our server
+  // server.get('*', (req, res) => {
+  //   // next.js is handling requests and providing pages we are navigating to
+  //   return handle(req, res)
+  // })
+
+  // server.post('*', (req, res) => {
+  //   // next.js is handling requests and providing pages we are navigating to
+  //   return handle(req, res)
+  // })
+
 
   const PORT = process.env.PORT || 3001;
 
+  // handle from the handler handle *
   server.use(handle).listen(PORT, (err) => {
     if (err) throw err
     console.log('> Ready on port ' + PORT)
